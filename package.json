@@ -1,7 +1,7 @@
 {
-  "name": "big-rig-cli",
+  "name": "node-big-rig",
   "version": "1.0.0",
-  "description": "A CLI for parsing trace (timeline) files from Chrome.",
+  "description": "A CLI and node module for parsing trace (timeline) files from Chrome.",
   "main": "index.js",
   "bin": {
     "bigrig": "bigrig.js"
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GoogleChrome/big-rig.git"
+    "url": "git+https://github.com/GoogleChrome/node-big-rig.git"
   },
   "keywords": [
     "chrome",
@@ -32,7 +32,7 @@
   "author": "Paul Lewis (Google)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/GoogleChrome/big-rig/issues"
+    "url": "https://github.com/GoogleChrome/node-big-rig/issues"
   },
-  "homepage": "https://github.com/GoogleChrome/big-rig#readme"
+  "homepage": "https://github.com/GoogleChrome/node-big-rig#readme"
 }
