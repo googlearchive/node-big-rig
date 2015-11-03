@@ -25,6 +25,8 @@ npm install bigrig
 
 ## Usage
 
+### CLI
+
 To use the CLI you call `bigrig` and pass it the path to a trace file:
 
 ```bash
@@ -40,6 +42,27 @@ bigrig --trace=/path/to/trace.json
 ```
 
 You should then see a pretty printed output of the time breakdown for the trace.
+
+### Module
+
+You can also use Big Rig's module as part of a wider workflow.
+
+```node
+var bigrig = require('bigrig');
+var fs = require('fs');
+
+// Read trace file contents.
+fs.readFile('/path/to/trace.json', 'utf8', function(err, data) {
+  if (err)
+    throw err;
+
+  results = bigrig.analyze(data);
+
+  // Now do something with the results, like
+  // post to a dashboard.
+});
+
+```
 
 ## Getting a trace
 
