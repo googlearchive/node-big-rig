@@ -30,7 +30,7 @@ npm install bigrig
 To use the CLI you call `bigrig` and pass it the path to a trace file:
 
 ```bash
-bigrig --trace=/path/to/trace.json
+bigrig -file /path/to/trace.json
 ```
 
 This will, by default, simply return a JSON string that you can parse or manipulate as you see fit.
@@ -38,7 +38,7 @@ This will, by default, simply return a JSON string that you can parse or manipul
 If you wish to see a pretty printed version, add the `--pretty-print` flag:
 
 ```bash
-bigrig --trace=/path/to/trace.json
+bigrig -file =/path/to/trace.json --pretty-print
 ```
 
 You should then see a pretty printed output of the time breakdown for the trace.
