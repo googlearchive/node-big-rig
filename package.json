@@ -1,5 +1,5 @@
 {
-  "name": "node-big-rig",
+  "name": "bigrig",
   "version": "1.0.0",
   "description": "A CLI and node module for parsing trace (timeline) files from Chrome.",
   "main": "index.js",
