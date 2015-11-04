@@ -16,6 +16,14 @@ describe('Big Rig', function () {
 
   });
 
+  it ('throws if given invalid input data is given',  function () {
+
+    expect(function () {
+      bigrig.analyze('wobble')
+    }).to.throw('Invalid trace contents; not JSON');
+
+  });
+
   // TODO(paullewis) Add multiprocess test.
 
   it ('returns JSON for a file with a single process', function (done) {

@@ -19,9 +19,12 @@
 
 var argv = require('yargs')
     .usage('Usage: bigrig -file <input> [<option>]')
-    .demand('file')
-    .alias('file', 'f')
-    .describe('file', 'The trace file to be parsed')
+    .option('file', {
+      alias: 'f',
+      demand: false,
+      default: '_',
+      describe: 'The trace file to be parsed'
+    })
     .option('pretty-print', {
       alias: 'pp',
       demand: false,
@@ -33,30 +36,49 @@ var argv = require('yargs')
 var clc = require('cli-color');
 var fs = require('fs');
 var processor = require('./lib/processor');
-var path = '';
-
-
-// Find which file needs parsing.
-if (typeof argv.file !== 'string') {
-  console.error(
-      'Trace file path needs to be passed, --trace=/path/to/trace.json');
-  process.exit(1);
-}
-
-path = argv.file;
+var path = argv.file;
+var traceContents = '';
 
 // Check the file exists.
 try {
   fs.statSync(path);
+  traceContents = fs.readFileSync(path, 'utf8');
+  processContents(traceContents);
+
 } catch (e) {
-  console.error('Trace file could not be found.');
-  process.exit(1);
+
+  // Assume reading from stdin
+  process.stdin.setEncoding('utf8');
+  process.stdin.on('readable', function() {
+    var chunk = process.stdin.read();
+
+    console.log(chunk);
+
+    if (chunk !== null)
+      traceContents += chunk;
+  });
+
+  process.stdin.on('end', function () {
+    processContents(traceContents);
+  })
 }
 
-function prettyPrint (result, indent, frames) {
+function processContents (contents) {
+
+  // Read the file, analyze, and print.
+  var results = processor.analyzeTrace(contents);
+
+  if (argv['pretty-print'])
+    prettyPrint(results);
+  else
+    console.log(JSON.stringify(results));
+
+}
+
+function prettyPrint (result, indent, frameCount) {
 
   indent = indent || 0;
-  frames = frames || 1;
+  frameCount = frameCount || 1;
 
   var paddingDistance = 40;
   var labelPadding = padOut('', indent);
@@ -103,8 +125,8 @@ function prettyPrint (result, indent, frames) {
 
       // Get values per frame if this is an animation.
       if (value.type === processor.ANIMATION &&
-          typeof value.frames !== 'undefined') {
-        frames = value.frames;
+          typeof value.frameCount !== 'undefined') {
+        frameCount = value.frameCount;
       }
     }
 
@@ -114,9 +136,9 @@ function prettyPrint (result, indent, frames) {
     // tidy it up and add a suffix.
     if (typeof value === 'number') {
 
-      if (key !== 'fps') {
+      if (key !== 'fps' && key !== 'frameCount') {
 
-        perFrameValue = (value / frames).toFixed(2) + 'ms';
+        perFrameValue = (value / frameCount).toFixed(2) + 'ms';
 
         value = value.toFixed(2);
         suffix = 'ms';
@@ -124,26 +146,17 @@ function prettyPrint (result, indent, frames) {
 
       value = value + suffix;
 
-      if (perFrameValue && frames !== 1) {
+      if (perFrameValue && frameCount !== 1) {
         value = padOut(value, 12) + ' (' + perFrameValue + ' per frame)';
       }
     }
 
     if (typeof value === 'object') {
       console.log(labelPadding + label);
-      prettyPrint(value, indent + 2, frames);
+      prettyPrint(value, indent + 2, frameCount);
     } else {
       var msg = labelPadding + label + value;
       console.log(msg);
     }
   }
 }
-
-// Read the file, analyze, and print.
-var contents = fs.readFileSync(path, 'utf8');
-var results = processor.analyzeTrace(contents);
-
-if (argv['pretty-print'])
-  prettyPrint(results);
-else
-  console.log(JSON.stringify(results));
