@@ -17,12 +17,12 @@
  * limitations under the License.
  */
 
-var argv = require('yargs')
-    .usage('Usage: bigrig -file <input> [<option>]')
+var yargs = require('yargs')
+    .usage('Usage: bigrig --file <input> [<option>]')
     .option('file', {
       alias: 'f',
       demand: false,
-      default: '_',
+      default: '',
       describe: 'The trace file to be parsed'
     })
     .option('pretty-print', {
@@ -31,7 +31,8 @@ var argv = require('yargs')
       default: false,
       describe: 'Pretty print the results'
     })
-    .argv;
+
+var argv = yargs.argv;
 
 var clc = require('cli-color');
 var fs = require('fs');
@@ -47,15 +48,27 @@ try {
 
 } catch (e) {
 
+  var checkedFirstChunk = false;
+
   // Assume reading from stdin
   process.stdin.setEncoding('utf8');
   process.stdin.on('readable', function() {
     var chunk = process.stdin.read();
 
-    console.log(chunk);
+    // If the very first chunk is null, then
+    // we weren't given any data, so exit.
+    if (!checkedFirstChunk) {
+
+      checkedFirstChunk = true;
+      if (chunk === null) {
+        console.log(yargs.help());
+        process.exit(1);
+      }
+    }
 
     if (chunk !== null)
       traceContents += chunk;
+
   });
 
   process.stdin.on('end', function () {
@@ -146,7 +159,14 @@ function prettyPrint (result, indent, frameCount) {
 
       value = value + suffix;
 
-      if (perFrameValue && frameCount !== 1) {
+      if (key !== 'start' &&
+          key !== 'end' &&
+          key !== 'duration' &&
+          key !== 'domContentLoaded' &&
+          key !== 'loadTime' &&
+          key !== 'firstPaint' &&
+          perFrameValue &&
+          frameCount !== 1) {
         value = padOut(value, 12) + ' (' + perFrameValue + ' per frame)';
       }
     }
