@@ -68,7 +68,7 @@ fs.readFile('/path/to/trace.json', 'utf8', function(err, data) {
 
 You can get a trace from:
 
-* **[WebPagetest](http://webpagetest.org)**. Run your test with Chrome, and check "Capture Dev Tools Timeline" under the Chrome options. Download the timeline file (which is a trace file) and pass it to Big Rig
+* **[WebPagetest](http://webpagetest.org)**. Run your test with Chrome, and check "Capture Dev Tools Timeline" under the Chrome options. Download the timeline file (which is a trace file) and pass it to Big Rig.
 * **[Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/timeline-tool?hl=en)**. Take a timeline recording, and then right click on the timeline, save the file, and pass it to Big Rig.
 * **[Big Rig's Test Runner](https://github.com/GoogleChrome/big-rig/tree/master/test-runner)**. This uses Chrome Driver under the hood, and will allow you to run an automated test (including for Android) and get back a trace file.
 
