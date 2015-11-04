@@ -5,7 +5,7 @@ Node Big Rig comes in two flavors:
 1. A module for doing trace analysis inline to other tasks.
 2. A CLI tool.
 
-![Big Rig CLI](https://cloud.githubusercontent.com/assets/617438/10911511/123156f6-823d-11e5-86a5-ae30dab6122e.png)
+![Big Rig CLI](https://cloud.githubusercontent.com/assets/617438/10942590/a23ce7da-8308-11e5-86d0-3f0a2569534b.png)
 
 Both the module and CLI perform the same analysis as [the web app](https://github.com/GoogleChrome/big-rig), just headlessly. This makes it a good fit for use in CI environments, or as part of bigger workflows.
 
