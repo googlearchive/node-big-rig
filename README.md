@@ -78,6 +78,10 @@ You can get a trace from:
 
 See /LICENSE
 
+## Owner
+
+Paul Lewis - [@aerotwist](https://twitter.com/aerotwist)
+
 ## Thanks
 
 The tracing code is a manipulated version of [Chrome's Trace Viewer](https://github.com/catapult-project/catapult/tree/master/tracing). A huge thanks to the Chromium engineers for making it possible to analyze traces.
