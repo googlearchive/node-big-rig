@@ -1,5 +1,7 @@
 # Node Big Rig
 
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
+
 Node Big Rig comes in two flavors:
 
 1. A module for doing trace analysis inline to other tasks.
@@ -81,3 +83,12 @@ See /LICENSE
 The tracing code is a manipulated version of [Chrome's Trace Viewer](https://github.com/catapult-project/catapult/tree/master/tracing). A huge thanks to the Chromium engineers for making it possible to analyze traces.
 
 Please note: this is not an official Google product.
+
+[npm-url]: https://npmjs.org/package/bigrig
+[npm-image]: https://badge.fury.io/js/bigrig.svg
+
+[travis-url]: https://travis-ci.org/GoogleChrome/node-big-rig
+[travis-image]: https://travis-ci.org/GoogleChrome/node-big-rig.svg?branch=master
+
+[depstat-url]: https://david-dm.org/GoogleChrome/node-big-rig
+[depstat-image]: https://david-dm.org/GoogleChrome/node-big-rig.svg
