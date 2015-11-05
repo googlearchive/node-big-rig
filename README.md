@@ -9,7 +9,7 @@ Node Big Rig comes in two flavors:
 
 ![Big Rig CLI](https://cloud.githubusercontent.com/assets/617438/10954268/5c977f4c-8344-11e5-9460-dc00e86970f3.png)
 
-Both the module and CLI perform the same analysis as [the web app](https://github.com/GoogleChrome/big-rig), just headlessly. This makes it a good fit for use in CI environments, or as part of bigger workflows.
+Both the module and CLI perform the same analysis as [the web app](https://github.com/GoogleChrome/big-rig), just without a UI. This makes it a good fit for use in CI environments, or as part of bigger workflows.
 
 ## Installation
 
