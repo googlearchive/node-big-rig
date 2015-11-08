@@ -12,6 +12,7 @@
   "dependencies": {
     "cli-color": "^1.1.0",
     "mkdirp": "^0.5.1",
+    "snyk": "^1.1.1",
     "yargs": "^3.29.0"
   },
   "devDependencies": {
@@ -21,7 +22,7 @@
     "mocha": "^2.3.3"
   },
   "scripts": {
-    "test": "eslint . && mocha test/*.js --timeout 60000"
+    "test": "eslint . && mocha test/*.js --timeout 60000 && snyk test"
   },
   "repository": {
     "type": "git",
