@@ -12,7 +12,7 @@ describe('Big Rig', function () {
 
     expect(function () {
       bigrig.analyze(null)
-    }).to.throw('Zero processes found');
+    }).to.throw('Zero processes (tabs) found.');
 
   });
 

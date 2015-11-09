@@ -1,6 +1,6 @@
 {
   "name": "bigrig",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A CLI and node module for parsing trace (timeline) files from Chrome.",
   "main": "index.js",
   "bin": {

@@ -48,6 +48,11 @@ try {
 
 } catch (e) {
 
+  if (typeof e === 'string') {
+    console.warn(clc.red('Unable to process trace: ') + clc.yellow(e));
+    process.exit(1);
+  }
+
   var checkedFirstChunk = false;
 
   // Assume reading from stdin
