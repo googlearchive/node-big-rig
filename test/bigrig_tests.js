@@ -222,10 +222,10 @@ describe('Big Rig', function () {
 
         var jsonData = bigrig.analyze(data);
         expect(
-          jsonData[0].extendedInfo.javaScript['localhost:11080']
+          jsonData[0].extendedInfo.JavaScript['localhost:11080']
         ).to.be.within(277, 278);
         expect(
-          jsonData[0].extendedInfo.javaScript['www.google-analytics.com']
+          jsonData[0].extendedInfo.JavaScript['www.google-analytics.com']
         ).to.be.within(59, 60);
         done();
 
