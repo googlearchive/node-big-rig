@@ -24,6 +24,28 @@ describe('Big Rig', function () {
 
   });
 
+  it ('throws if given a trace with extensions and strict mode is enabled',
+    function (done) {
+
+      fs.readFile('./test/data/load-extensions.json', 'utf8',
+
+        function (err, data) {
+
+          if (err)
+            throw err;
+
+          var error = 'Extensions running during capture; ' +
+              'see http://bit.ly/bigrig-extensions';
+
+          expect(function () {
+            bigrig.analyze(data, { strict: true });
+          }).to.throw(error);
+
+          done();
+        })
+
+    });
+
   // TODO(paullewis) Add multiprocess test.
 
   it ('returns JSON for a file with a single process', function (done) {

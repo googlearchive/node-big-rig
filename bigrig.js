@@ -31,6 +31,12 @@ var yargs = require('yargs')
       default: false,
       describe: 'Pretty print the results'
     })
+    .option('strict', {
+      alias: 's',
+      demand: false,
+      default: false,
+      describe: 'Throw if extensions are found'
+    });
 
 var argv = yargs.argv;
 
@@ -77,14 +83,18 @@ try {
   });
 
   process.stdin.on('end', function () {
-    processContents(traceContents);
+    processContents(traceContents, {
+      strict: argv.strict
+    });
   })
 }
 
 function processContents (contents) {
 
   // Read the file, analyze, and print.
-  var results = processor.analyzeTrace(contents);
+  var results = processor.analyzeTrace(contents, {
+    strict: argv.strict
+  });
 
   if (argv['pretty-print'])
     prettyPrint(results);
