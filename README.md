@@ -74,6 +74,8 @@ You can get a trace from:
 * **[Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/profile/evaluate-performance/timeline-tool?hl=en)**. Take a timeline recording, and then right click on the timeline, save the file, and pass it to Big Rig.
 * **[Big Rig's Test Runner](https://github.com/GoogleChrome/big-rig/tree/master/test-runner)**. This uses Chrome Driver under the hood, and will allow you to run an automated test (including for Android) and get back a trace file.
 
+**Please note:** you can only have one tab open when running the trace. If you have multiple tabs Big Rig won't be able to disambiguate and process the correct tab. You should also ideally disable any extensions you have running, as these can skew results. You can add the `--strict` flag if you want Big Rig to throw an error when it encounters extensions.
+
 ## License
 
 See /LICENSE
