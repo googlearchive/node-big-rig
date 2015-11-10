@@ -11,7 +11,7 @@ describe('Big Rig', function () {
   it ('throws if no processes are found',  function () {
 
     expect(function () {
-      bigrig.analyze(null)
+      bigrig.analyze(null);
     }).to.throw('Zero processes (tabs) found.');
 
   });
@@ -19,7 +19,7 @@ describe('Big Rig', function () {
   it ('throws if given invalid input data is given',  function () {
 
     expect(function () {
-      bigrig.analyze('wobble')
+      bigrig.analyze('wobble');
     }).to.throw('Invalid trace contents; not JSON');
 
   });
@@ -42,7 +42,7 @@ describe('Big Rig', function () {
           }).to.throw(error);
 
           done();
-        })
+        });
 
     });
 
@@ -62,7 +62,7 @@ describe('Big Rig', function () {
         expect(jsonData[0]).to.be.an('object');
         done();
 
-      })
+      });
   });
 
   it ('generates valid JSON', function (done) {
@@ -79,8 +79,8 @@ describe('Big Rig', function () {
         expect(jsonData).to.be.an('array');
         done();
 
-      })
-  })
+      });
+  });
 
   it ('supports timed ranges', function (done) {
 
@@ -98,8 +98,8 @@ describe('Big Rig', function () {
         expect(jsonData[0].end).to.be.within(1179, 1180);
         done();
 
-      })
-  })
+      });
+  });
 
   it ('correctly applies RAIL type when time range is specified',
 
@@ -120,8 +120,8 @@ describe('Big Rig', function () {
           expect(jsonData[0].type).to.equal(bigrig.ANIMATION);
           done();
 
-        })
-    })
+        });
+    });
 
   it ('correctly infers RAIL Load when time range not specified',
     function (done) {
@@ -137,8 +137,8 @@ describe('Big Rig', function () {
           expect(jsonData[0].title).to.equal('Load');
           done();
 
-        })
-    })
+        });
+    });
 
   it ('correctly infers RAIL Response when time range not specified',
     function (done) {
@@ -154,8 +154,8 @@ describe('Big Rig', function () {
           expect(jsonData[0].title).to.equal('sideNavResponse');
           done();
 
-        })
-    })
+        });
+    });
 
   it ('correctly infers RAIL Animation when time range not specified',
     function (done) {
@@ -171,8 +171,8 @@ describe('Big Rig', function () {
           expect(jsonData[0].title).to.equal('sideNavAnimation');
           done();
 
-        })
-    })
+        });
+    });
 
   it ('correctly infers multiple RAIL regions', function (done) {
 
@@ -194,8 +194,8 @@ describe('Big Rig', function () {
 
         done();
 
-      })
-  })
+      });
+  });
 
   it ('returns the correct fps for animations', function (done) {
 
@@ -209,8 +209,8 @@ describe('Big Rig', function () {
         expect(jsonData[0].fps).to.be.within(59, 61);
         done();
 
-      })
-  })
+      });
+  });
 
   it ('returns the correct JS breakdown', function (done) {
 
@@ -229,6 +229,6 @@ describe('Big Rig', function () {
         ).to.be.within(59, 60);
         done();
 
-      })
-  })
+      });
+  });
 });
