@@ -22,7 +22,7 @@
     "mocha": "^2.3.3"
   },
   "scripts": {
-    "test": "eslint . && mocha test/*.js --timeout 60000 && snyk test"
+    "test": "eslint . && mocha test/*.js --timeout 60000"
   },
   "repository": {
     "type": "git",
