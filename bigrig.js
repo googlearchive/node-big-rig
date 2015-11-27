@@ -18,7 +18,7 @@
  */
 
 var yargs = require('yargs')
-    .usage('Usage: bigrig --file <input> [<option>]')
+    .usage('Usage: bigrig <input> [<option>]')
     .option('file', {
       alias: 'f',
       demand: false,
@@ -45,6 +45,12 @@ var fs = require('fs');
 var processor = require('./lib/processor');
 var path = argv.file;
 var traceContents = '';
+
+// If there's no --file arg and there's an unnamed arg passed, try
+// setting the path to that.
+if (path === '' && typeof argv._ !== 'undefined' && argv._.length > 0) {
+  path = argv._[0];
+}
 
 // Check the file exists.
 try {
