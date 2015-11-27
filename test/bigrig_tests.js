@@ -223,7 +223,7 @@ describe('Big Rig', function () {
         var jsonData = bigrig.analyze(data);
         expect(
           jsonData[0].extendedInfo.javaScript['localhost:11080']
-        ).to.be.within(277, 278);
+        ).to.be.within(245, 246);
         expect(
           jsonData[0].extendedInfo.javaScript['www.google-analytics.com']
         ).to.be.within(59, 60);
