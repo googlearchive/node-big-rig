@@ -69,7 +69,7 @@ try {
 
   // Assume reading from stdin
   process.stdin.setEncoding('utf8');
-  process.stdin.on('readable', function() {
+  process.stdin.on('readable', function () {
     var chunk = process.stdin.read();
 
     // If the very first chunk is null, then
@@ -83,8 +83,9 @@ try {
       }
     }
 
-    if (chunk !== null)
+    if (chunk !== null) {
       traceContents += chunk;
+    }
 
   });
 
@@ -92,7 +93,7 @@ try {
     processContents(traceContents, {
       strict: argv.strict
     });
-  })
+  });
 }
 
 function processContents (contents) {
@@ -102,10 +103,11 @@ function processContents (contents) {
     strict: argv.strict
   });
 
-  if (argv['pretty-print'])
+  if (argv['pretty-print']) {
     prettyPrint(results);
-  else
+  } else {
     console.log(JSON.stringify(results));
+  }
 
 }
 
@@ -124,18 +126,20 @@ function prettyPrint (result, indent, frameCount) {
   var suffix;
   var perFrameValue;
 
-  function padOut(str, len) {
+  function padOut (str, len) {
 
-    while(str.length < len)
+    while (str.length < len) {
       str += ' ';
+    }
 
     return str;
   }
 
   // For empty objects write out something, otherwise
   // it looks like a big ol' error.
-  if (keys.length === 0)
+  if (keys.length === 0) {
     console.log(labelPadding + '{}');
+  }
 
   for (var k = 0; k < keys.length; k++) {
 
@@ -146,8 +150,9 @@ function prettyPrint (result, indent, frameCount) {
 
     // Skip the title and type values, because
     // they will be incorporated by the top level.
-    if (key === 'title' || key === 'type')
+    if (key === 'title' || key === 'type') {
       continue;
+    }
 
     // If we have a numeric key, this is a top level item.
     if (!isNaN(parseInt(key))) {
@@ -170,7 +175,10 @@ function prettyPrint (result, indent, frameCount) {
     // tidy it up and add a suffix.
     if (typeof value === 'number') {
 
-      if (key !== 'fps' && key !== 'frameCount') {
+      if (key !== 'fps' &&
+          key !== 'frameCount' &&
+          key !== 'forcedRecalcs' &&
+          key !== 'forcedLayouts') {
 
         perFrameValue = (value / frameCount).toFixed(2) + 'ms';
 
