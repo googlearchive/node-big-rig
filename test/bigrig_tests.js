@@ -8,7 +8,7 @@ var bigrig = require('../');
 
 describe('Big Rig', function () {
 
-  it ('throws if no processes are found',  function () {
+  it ('throws if no processes are found', function () {
 
     expect(function () {
       bigrig.analyze(null);
@@ -16,7 +16,7 @@ describe('Big Rig', function () {
 
   });
 
-  it ('throws if given invalid input data is given',  function () {
+  it ('throws if given invalid input data is given', function () {
 
     expect(function () {
       bigrig.analyze('wobble');
@@ -31,14 +31,17 @@ describe('Big Rig', function () {
 
         function (err, data) {
 
-          if (err)
+          if (err) {
             throw err;
+          }
 
           var error = 'Extensions running during capture; ' +
               'see http://bit.ly/bigrig-extensions';
 
           expect(function () {
-            bigrig.analyze(data, { strict: true });
+            bigrig.analyze(data, {
+              strict: true
+            });
           }).to.throw(error);
 
           done();
@@ -53,8 +56,9 @@ describe('Big Rig', function () {
     fs.readFile('./test/data/load.json', 'utf8',
       function (err, data) {
 
-        if (err)
+        if (err) {
           throw err;
+        }
 
         var jsonData = bigrig.analyze(data);
 
@@ -70,8 +74,9 @@ describe('Big Rig', function () {
     fs.readFile('./test/data/load.json', 'utf8',
       function (err, data) {
 
-        if (err)
+        if (err) {
           throw err;
+        }
 
         var jsonData = bigrig.analyze(data);
         jsonData = JSON.parse(JSON.stringify(jsonData));
@@ -87,8 +92,9 @@ describe('Big Rig', function () {
     fs.readFile('./test/data/animation.json', 'utf8',
       function (err, data) {
 
-        if (err)
+        if (err) {
           throw err;
+        }
 
         var jsonData = bigrig.analyze(data);
 
@@ -108,8 +114,9 @@ describe('Big Rig', function () {
       fs.readFile('./test/data/animation.json', 'utf8',
         function (err, data) {
 
-          if (err)
+          if (err) {
             throw err;
+          }
 
           var jsonData = bigrig.analyze(data, {
             types: {
@@ -129,8 +136,9 @@ describe('Big Rig', function () {
       fs.readFile('./test/data/load.json', 'utf8',
         function (err, data) {
 
-          if (err)
+          if (err) {
             throw err;
+          }
 
           var jsonData = bigrig.analyze(data);
           expect(jsonData[0].type).to.equal(bigrig.LOAD);
@@ -146,8 +154,9 @@ describe('Big Rig', function () {
       fs.readFile('./test/data/response.json', 'utf8',
         function (err, data) {
 
-          if (err)
+          if (err) {
             throw err;
+          }
 
           var jsonData = bigrig.analyze(data);
           expect(jsonData[0].type).to.equal(bigrig.RESPONSE);
@@ -163,8 +172,9 @@ describe('Big Rig', function () {
       fs.readFile('./test/data/animation.json', 'utf8',
         function (err, data) {
 
-          if (err)
+          if (err) {
             throw err;
+          }
 
           var jsonData = bigrig.analyze(data);
           expect(jsonData[0].type).to.equal(bigrig.ANIMATION);
@@ -179,8 +189,9 @@ describe('Big Rig', function () {
     fs.readFile('./test/data/response-animation.json', 'utf8',
       function (err, data) {
 
-        if (err)
+        if (err) {
           throw err;
+        }
 
         var jsonData = bigrig.analyze(data);
 
@@ -202,8 +213,9 @@ describe('Big Rig', function () {
     fs.readFile('./test/data/animation.json', 'utf8',
       function (err, data) {
 
-        if (err)
+        if (err) {
           throw err;
+        }
 
         var jsonData = bigrig.analyze(data);
         expect(jsonData[0].fps).to.be.within(59, 61);
@@ -217,8 +229,9 @@ describe('Big Rig', function () {
     fs.readFile('./test/data/load.json', 'utf8',
       function (err, data) {
 
-        if (err)
+        if (err) {
           throw err;
+        }
 
         var jsonData = bigrig.analyze(data);
         expect(
@@ -227,6 +240,27 @@ describe('Big Rig', function () {
         expect(
           jsonData[0].extendedInfo.javaScript['www.google-analytics.com']
         ).to.be.within(59, 60);
+        done();
+
+      });
+  });
+
+  it ('correctly captures forced layouts and recalcs', function (done) {
+
+    fs.readFile('./test/data/forced-recalc-layout.json', 'utf8',
+      function (err, data) {
+
+        if (err) {
+          throw err;
+        }
+
+        var jsonData = bigrig.analyze(data);
+        expect(
+          jsonData[0].extendedInfo.forcedRecalcs
+        ).to.equal(1);
+        expect(
+          jsonData[0].extendedInfo.forcedLayouts
+        ).to.equal(1);
         done();
 
       });
