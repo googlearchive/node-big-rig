@@ -41,7 +41,6 @@ var yargs = require('yargs')
 var argv = yargs.argv;
 
 var clc = require('cli-color');
-var util = require('util');
 var fs = require('fs');
 var processor = require('./lib/processor');
 var path = argv.file;
