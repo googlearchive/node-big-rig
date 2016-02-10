@@ -54,15 +54,16 @@ if (path === '' && typeof argv._ !== 'undefined' && argv._.length > 0) {
 
 // Check the file exists.
 try {
+
   fs.statSync(path);
   traceContents = fs.readFileSync(path, 'utf8');
   processContents(traceContents);
 
-} catch (e) {
+} catch (fileProcessError) {
 
-  if (typeof e === 'string') {
-    console.warn(clc.red('Unable to process trace: ') + clc.yellow(e));
-    process.exit(1);
+  if (typeof fileProcessError === 'string' ||
+      fileProcessError.code !== 'ENOENT') {
+    bailWithMessage(fileProcessError.toString());
   }
 
   var checkedFirstChunk = false;
@@ -90,12 +91,14 @@ try {
   });
 
   process.stdin.on('end', function () {
-    processContents(traceContents, {
-      strict: argv.strict
-    });
+    try {
+      processContents(traceContents, {
+        strict: argv.strict
+      });
+    } catch (processError) {
+      bailWithMessage(processError.toString());
+    }
   });
-
-  throw e;
 }
 
 function processContents (contents) {
@@ -111,6 +114,11 @@ function processContents (contents) {
     console.log(JSON.stringify(results));
   }
 
+}
+
+function bailWithMessage (msg) {
+  console.warn(clc.red('Unable to process trace: ') + clc.yellow(msg));
+  process.exit(1);
 }
 
 function prettyPrint (result, indent, frameCount) {
