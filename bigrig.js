@@ -94,6 +94,8 @@ try {
       strict: argv.strict
     });
   });
+
+  throw e;
 }
 
 function processContents (contents) {
