@@ -41,6 +41,7 @@ var yargs = require('yargs')
 var argv = yargs.argv;
 
 var clc = require('cli-color');
+var util = require('util');
 var fs = require('fs');
 var processor = require('./lib/processor');
 var path = argv.file;
@@ -94,6 +95,8 @@ try {
       strict: argv.strict
     });
   });
+
+  throw e;
 }
 
 function processContents (contents) {
